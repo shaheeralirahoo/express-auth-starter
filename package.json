@@ -1,0 +1,44 @@
+{
+  "name": "express",
+  "module": "dist/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "npx tsc-watch -p ./tsconfig.json --onSuccess \"node ./dist/index.js\"",
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "db:migrate": "npx prisma db push",
+    "db:generate": "npx prisma generate"
+  },
+  "devDependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/cors": "^2.8.17",
+    "@types/cron": "^2.4.0",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/node": "^20.11.7",
+    "prisma": "^5.12.1",
+    "tsc-watch": "^6.2.0",
+    "typescript": "^5.3.3"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.12.1",
+    "@types/node-schedule": "^2.1.7",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "chalk": "4.1.2",
+    "cors": "^2.8.5",
+    "cron": "^3.1.6",
+    "dotenv": "^16.4.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "moment": "^2.30.1",
+    "node-cron": "^3.0.3",
+    "node-schedule": "^2.1.1",
+    "request-ip": "^3.3.0",
+    "zod": "^3.22.4"
+  }
+}

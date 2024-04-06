@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamp(6)
+  isdeleted Boolean  @default(false) @db.TinyInt()
+  username  String   @unique
+  password  String   @db.VarChar(255)
+  ipAddress IpAddress[] @relation("user_IpAddress")
+  // userOnIpAddress userOnIpAddress
+  // userOnIpAddress userOnIpAddress[] @relation("user_userOnIpAddress")
+}
+
+model IpAddress {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamp(6)
+  isdeleted Boolean  @default(false) @db.TinyInt()
+  ipAddress String   @db.VarChar(255)
+  userId   Int
+  users    User    @relation("user_IpAddress",fields:[userId],references: [id])
+  attempt   Int      @default(0) @db.Int()
+  isblocked Boolean  @default(false) @db.TinyInt()
+  // userOnIpAddress userOnIpAddress[] @relation("ipAddress_userOnIpAddress")
+}
+
+// model userOnIpAddress {
+//   createdAt DateTime @default(now()) @db.Timestamp(6)
+//   updatedAt DateTime @updatedAt
+//   userId   Int   @db.Int()
+//   IpAddressId    Int   @db.Int()
+//   user    User    @relation("user_userOnIpAddress", fields: [userId], references: [id])
+//   IpAddress     IpAddress    @relation("ipAddress_userOnIpAddress", fields: [IpAddressId], references: [id])
+//   @@id([userId,IpAddressId])
+// }
